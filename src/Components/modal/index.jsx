@@ -18,8 +18,8 @@ const Modal = () => {
 
     const modalStyles =
         isError === false
-        ? 'bg-green-500 text-white'
-        : 'bg-red-500 text-white';
+        ? 'bg-blue-400'
+        : 'bg-red-400';
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -31,20 +31,24 @@ const Modal = () => {
 
             {/* Modal Content */}
             <div
-                className={`relative p-6 rounded-lg shadow-lg ${modalStyles}`}
+                className={`relative p-0.5 rounded-lg shadow-lg ${modalStyles}`}
+                onClick={onClose}
             >
                 <button
-                className="absolute top-2 right-2 text-2xl leading-none"
-                onClick={onClose}
-                >
-                &times;
-                </button>
-                <div className="text-center">
-                <h2 className="text-2xl font-bold mb-4">
-                    {isError === 'Error' ? 'Error' : 'Success'}
-                </h2>
-                <p>{message}</p>
+                    className="absolute top-0 right-3 text-2xl text-white "
+                    onClick={onClose}
+                    >
+                    &times;
+                    </button>
+                <div className=' bg-slate-900 rounded-lg py-2 px-10'>
+                    <div className="text-center font-satoshi-bolditalic text-slate-200">
+                        <h2 className="text-2xl font-bold mb-4">
+                            {isError === false ? 'Success' : 'Error'}
+                        </h2>
+                        <p>{message}</p>
+                    </div>
                 </div>
+                
             </div>
         </div>
     );
