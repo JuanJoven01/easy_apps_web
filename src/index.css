@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colores personalizados */
+  --color-alpha: #053e2f;
+  --color-bravo: #065542;
+  --color-charlie: #076e62;
+  --color-delta: #098667;
+  --color-echo: #0a9e97;
+  --color-gradient-alpha: rgba(0, 255, 234, 0.08);
+  --color-gradient-bravo: rgba(61, 200, 255, 0.08);
+
+  /* Familias de fuentes personalizadas */
+  --font-merri: "Merriweather Sans", sans-serif;
+  --font-satoshi-regular: "Satoshi-Regular", sans-serif;
+  --font-satoshi-bold: "Satoshi-Bold", sans-serif;
+  --font-satoshi-medium: "Satoshi-Medium", sans-serif;
+  --font-satoshi-black: "Satoshi-Black", sans-serif;
+  --font-satoshi-light: "Satoshi-Light", sans-serif;
+  --font-satoshi-italic: "Satoshi-Italic", sans-serif;
+  --font-satoshi-bolditalic: "Satoshi-BoldItalic", sans-serif;
+  --font-satoshi-mediumitalic: "Satoshi-MediumItalic", sans-serif;
+  --font-satoshi-blackitalic: "Satoshi-BlackItalic", sans-serif;
+  --font-satoshi-lightitalic: "Satoshi-LightItalic", sans-serif;
+
+  /* Animaciones personalizadas */
+  --animation-spin-slow: spin 5s linear infinite;
+}
+
+@layer utilities {
+  /* Fondo con gradiente radial */
+  .bg-radial-gradient {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+}
+
+@font-face {
+  font-family: "Satoshi-Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/satoshi/Satoshi-Regular.woff2") format("woff2"),
+       url("/fonts/satoshi/Satoshi-Regular.woff") format("woff");
+}
+
+/* Repite las declaraciones @font-face para las demás variantes de la fuente Satoshi */
