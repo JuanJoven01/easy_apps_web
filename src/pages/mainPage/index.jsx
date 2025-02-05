@@ -5,7 +5,11 @@ const MainPage = () => {
 
     return (
         <div className=' backdrop-blur-3xl'>
-            <Header/>
+            <Header
+                title="Easy Apps"
+                subtitle="The Easier Way"
+                description="Easy Apps is a set of management applications designed to simplify your daily tasks, offering intuitive tools that make it easy to organize and control your activities without unnecessary complications."
+            />
             <AppsList/>
         </div>
 
