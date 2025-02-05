@@ -1,4 +1,5 @@
 import Navbar from './Components/navbar'
+import Footer from './Components/footer'
 
 function App() {
 
@@ -6,9 +7,9 @@ function App() {
     <>
       <Navbar />
       <div className='total flex bg-slate-900'>
-            <div className='semi-total w-full max-w-6xl mx-auto'>
-            </div>
-          </div>
+        <div className='semi-total w-full max-w-6xl mx-auto'> </div>
+      </div>
+      <Footer />
     </>
   )
 }
