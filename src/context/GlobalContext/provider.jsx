@@ -4,15 +4,19 @@ import GlobalContext from './context';
 
 export const GlobalProvider = ({ children }) => {
     const [modal, setModal] = useState ({
-        'isOpen' : true,
-        'isError' : true,
-        'message' : 'null',
+        'isOpen' : false,
+        'isError' : false,
+        'message' : `You shouldn't see this message`,
     })
+
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         <GlobalContext.Provider value={{ 
                     modal, 
-                    setModal 
+                    setModal,
+                    isLoading,
+                    setIsLoading
                 }}>
 
             {children}

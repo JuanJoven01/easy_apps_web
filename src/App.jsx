@@ -5,13 +5,15 @@ import MainPage from './pages/mainPage';
 import SignUpPage from "./pages/signUp";
 import useGlobalContext from "./context/GlobalContext/useGlobalContext";
 import Modal from "./Components/modal";
+import Loading from "./Components/loading";
 
 
 
 function App() {
-  const {modal} = useGlobalContext()
+  const {modal, isLoading} = useGlobalContext()
   return (
     <>
+      {isLoading ? <Loading/> : null}
       {modal['isOpen'] ? <Modal/> : null}
       <Navbar />
       <div className='total flex bg-slate-900'>
