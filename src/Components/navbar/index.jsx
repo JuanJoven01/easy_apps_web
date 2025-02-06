@@ -12,7 +12,7 @@ const Navbar = () => {
                 <a className={`px-5 hover:cursor-pointer hover:text-echo hover:underline`} href="signup">
                     Sign-Up
                 </a>
-                <a className={`px-5 hover:cursor-pointer hover:text-echo hover:underline`} href="https://github.com/JuanJoven01" target="_blank" rel="noopener noreferrer" >
+                <a className={`px-5 hover:cursor-pointer hover:text-echo hover:underline`} href="activate">
                     Activate User
                 </a>
             </ul>

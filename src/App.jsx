@@ -3,6 +3,7 @@ import Navbar from './Components/navbar'
 import Footer from './Components/footer'
 import MainPage from './pages/mainPage';
 import SignUpPage from "./pages/signUp";
+import ActivateUserPage from "./pages/activateUser";
 import useGlobalContext from "./context/GlobalContext/useGlobalContext";
 import Modal from "./Components/modal";
 import Loading from "./Components/loading";
@@ -22,6 +23,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<MainPage />} />
                   <Route path="/signup" element={<SignUpPage />} />
+                  <Route path="/activate" element={<ActivateUserPage />} />
                   <Route path="/*" element={<MainPage />} />
                 </Routes>
               </BrowserRouter>

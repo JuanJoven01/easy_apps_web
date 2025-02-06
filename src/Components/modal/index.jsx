@@ -54,11 +54,5 @@ const Modal = () => {
     );
     };
 
-Modal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    type: PropTypes.oneOf(['success', 'error']).isRequired,
-    message: PropTypes.string.isRequired,
-};
 
 export default Modal;

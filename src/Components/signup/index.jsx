@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useGlobalContext from '../../context/GlobalContext/useGlobalContext';
 
 const SignUpComponent = () => {
   // State to manage form data
@@ -9,10 +10,7 @@ const SignUpComponent = () => {
         confirmPassword: '',
     });
 
-    // State to manage form errors
-    const [errors, setErrors] = useState({
-        passwordMismatch: false,
-    });
+    const {setModal} = useGlobalContext()
 
     // Handle input field changes
     const handleChange = (e) => {
@@ -24,29 +22,32 @@ const SignUpComponent = () => {
     };
 
     // Validate if passwords match
-    const validatePasswords = () => {
-        const { password, confirmPassword } = formData;
+    const validateData = () => {
+        const { password, confirmPassword,name } = formData;
+        if (name.length <= 6) {
+            setModal({
+                'isOpen' : true,
+                'isError' : true,
+                'message' : `Name Must Be At Least 6 Characters`,
+            })
+        }
         if (password && confirmPassword && password !== confirmPassword) {
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            passwordMismatch: true,
-        }));
-        } else {
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            passwordMismatch: false,
-        }));
+            setModal({
+                'isOpen' : true,
+                'isError' : true,
+                'message' : `Passwords Mismatch`,
+            })
         }
     };
 
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        validatePasswords();
-        if (!errors.passwordMismatch) {
+        validateData();
+        
         // Process form data
         console.log('Form data:', formData);
-        }
+        
     };
 
     return (
@@ -112,9 +113,6 @@ const SignUpComponent = () => {
                     className="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                 />
                 </div>
-                {errors.passwordMismatch && (
-                <p className="text-red-500 text-sm">Passwords do not match.</p>
-                )}
                 <button
                 type="submit"
                 className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
