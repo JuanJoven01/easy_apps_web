@@ -1,5 +1,6 @@
 import { useState } from 'react';
-// import useGlobalContext from '../../context/GlobalContext/useGlobalContext';
+import useGlobalContext from '../../context/GlobalContext/useGlobalContext';
+import resendCodeAPI from '../../services/resendCode';
 
 const ResendCodeComponent = () => {
   // State to manage form data
@@ -7,7 +8,7 @@ const ResendCodeComponent = () => {
         email: '',
     });
 
-    // const {setModal} = useGlobalContext()
+    const {setModal, setIsLoading} = useGlobalContext()
 
     // Handle input field changes
     const handleChange = (e) => {
@@ -19,12 +20,34 @@ const ResendCodeComponent = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
+        setIsLoading(true)
         
         // Process form data
-        console.log('Form data:', formData);
+        const response   =  await resendCodeAPI(
+            formData.email,
+        )
         
+        if (response['error']) {
+            setModal({
+                'isOpen' : true,
+                'isError' : true,
+                'message' : response['message'],
+            })
+        } else {
+            setModal({
+                'isOpen' : true,
+                'isError' : false,
+                'message' : response['message'],
+            })
+            setFormData({
+                email: '',
+            })
+        }
+        
+        setIsLoading(false)
     };
 
     return (
@@ -50,7 +73,7 @@ const ResendCodeComponent = () => {
                 </div>
                 <button
                 type="submit"
-                className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                className=" hover:cursor-pointer w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >
                 Resend
                 </button>

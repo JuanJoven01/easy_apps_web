@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useGlobalContext from '../../context/GlobalContext/useGlobalContext';
+import ActivateUserAPI from '../../services/activateUser';
 
 const ActivateUserComponent = () => {
   // State to manage form data
@@ -8,7 +9,7 @@ const ActivateUserComponent = () => {
         code: '',
     });
 
-    const {setModal} = useGlobalContext()
+    const {setModal, setIsLoading} = useGlobalContext()
 
     // Handle input field changes
     const handleChange = (e) => {
@@ -33,13 +34,37 @@ const ActivateUserComponent = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
         validateData();
+        setIsLoading(true)
         
         // Process form data
-        console.log('Form data:', formData);
+        const response   =  await ActivateUserAPI(
+            formData.email,
+            formData.code,
+        )
         
+        if (response['error']) {
+            setModal({
+                'isOpen' : true,
+                'isError' : true,
+                'message' : response['message'],
+            })
+        } else {
+            setModal({
+                'isOpen' : true,
+                'isError' : false,
+                'message' : response['message'],
+            })
+            setFormData({
+                email: '',
+                code: '',
+            })
+        }
+        
+        setIsLoading(false)
     };
 
     return (
@@ -84,7 +109,7 @@ const ActivateUserComponent = () => {
                 </div>
                 <button
                 type="submit"
-                className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                className=" hover:cursor-pointer w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >
                 Activate
                 </button>

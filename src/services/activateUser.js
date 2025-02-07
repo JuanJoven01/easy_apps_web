@@ -1,19 +1,18 @@
 import axios from "axios";
 
 
-const signUpAPI = async  (email, name, password) => { 
+const ActivateUserAPI = async  (email, code) => { 
 
     try {        
         const response = await axios({
             method: 'post',
-            url: '/api/easy_apps/users/new_user',
+            url: '/api/easy_apps/users/validate_code',
             data: {
                 jsonrpc: '2.0',
                 method: 'call',
                 params: {
                     email: email,
-                    name: name,
-                    password: password,
+                    code: code
                     },
                 id: new Date().getTime(), // unique id for the request
                 }
@@ -27,4 +26,4 @@ const signUpAPI = async  (email, name, password) => {
     }
 }
 
-export default signUpAPI
+export default ActivateUserAPI

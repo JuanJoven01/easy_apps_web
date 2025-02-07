@@ -11,7 +11,7 @@ const SignUpComponent = () => {
         confirmPassword: '',
     });
 
-    const {setModal} = useGlobalContext()
+    const {setModal, setIsLoading} = useGlobalContext()
 
     // Handle input field changes
     const handleChange = (e) => {
@@ -42,14 +42,40 @@ const SignUpComponent = () => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
         validateData();
+        setIsLoading(true)
         
         // Process form data
-        console.log('Form data:', formData);
-        signUpAPI()
+        const response   =  await signUpAPI(
+            formData.email,
+            formData.name,
+            formData.password,
+        )
         
+        if (response['error']) {
+            setModal({
+                'isOpen' : true,
+                'isError' : true,
+                'message' : response['message'],
+            })
+        } else {
+            setModal({
+                'isOpen' : true,
+                'isError' : false,
+                'message' : response['message'],
+            })
+            setFormData({
+                email: '',
+                name: '',
+                password: '',
+                confirmPassword: '',
+            })   
+        }
+        
+        setIsLoading(false)
     };
 
     return (

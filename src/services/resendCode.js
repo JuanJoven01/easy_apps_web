@@ -1,19 +1,17 @@
 import axios from "axios";
 
 
-const signUpAPI = async  (email, name, password) => { 
+const resendCodeAPI = async  (email) => { 
 
     try {        
         const response = await axios({
             method: 'post',
-            url: '/api/easy_apps/users/new_user',
+            url: '/api/easy_apps/users/resend_code',
             data: {
                 jsonrpc: '2.0',
                 method: 'call',
                 params: {
                     email: email,
-                    name: name,
-                    password: password,
                     },
                 id: new Date().getTime(), // unique id for the request
                 }
@@ -27,4 +25,4 @@ const signUpAPI = async  (email, name, password) => {
     }
 }
 
-export default signUpAPI
+export default resendCodeAPI
