@@ -1,6 +1,7 @@
 import Header from '../../Components/header'
 import SignUpComponent from '../../Components/signup'
 
+
 const SignUpPage = () => {
 
     return (

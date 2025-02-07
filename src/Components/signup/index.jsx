@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useGlobalContext from '../../context/GlobalContext/useGlobalContext';
 import signUpAPI from '../../services/signup';
+import Navbar from '../navbar';
 
 const SignUpComponent = () => {
   // State to manage form data
@@ -25,6 +26,14 @@ const SignUpComponent = () => {
     // Validate if passwords match
     const validateData = () => {
         const { password, confirmPassword,name } = formData;
+        if (password.length <= 6) {
+            setModal({
+                'isOpen' : true,
+                'isError' : true,
+                'message' : `Password Must Be At Least 6 Characters`,
+            })
+        }
+
         if (name.length <= 6) {
             setModal({
                 'isOpen' : true,
