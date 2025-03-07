@@ -1,12 +1,12 @@
 import axios from "axios";
 
-
+const apiUrl = import.meta.env.VITE_API_URL;
 const signUpAPI = async  (email, name, password) => { 
 
     try {        
         const response = await axios({
             method: 'post',
-            url: '/api/easy_apps/users/new_user',
+            url: `${apiUrl}/easy_apps/users/new_user`,
             data: {
                 jsonrpc: '2.0',
                 method: 'call',

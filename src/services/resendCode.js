@@ -1,12 +1,12 @@
 import axios from "axios";
 
-
+const apiUrl = import.meta.env.VITE_API_URL;
 const resendCodeAPI = async  (email) => { 
 
     try {        
         const response = await axios({
             method: 'post',
-            url: '/api/easy_apps/users/resend_code',
+            url: `${apiUrl}/easy_apps/users/resend_code`,
             data: {
                 jsonrpc: '2.0',
                 method: 'call',
